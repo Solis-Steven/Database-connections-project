@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Form.css"
 
 function Form() {
@@ -6,6 +6,7 @@ function Form() {
     const [ userNameState, setUserNameState ] = React.useState("");
     const [ passwordState, setPasswordState ] = React.useState("");
     const myForm = React.useRef( null );
+    const btnSend = React.useRef( null );
 
     const userNameChanges = (e) => {
        setUserNameState(e.target.value); 
@@ -19,9 +20,18 @@ function Form() {
         e.preventDefault();
         console.log(userNameState);
         console.log(passwordState);
-        setUserNameState("");
-        setPasswordState("");
     }
+
+    useEffect( () => {
+        if (userNameState != "" && passwordState != "") {
+            btnSend.current.classList.remove("formulario-button__false");
+            btnSend.current.classList.add("formulario-button__true");
+        } else {
+            btnSend.current.classList.remove("formulario-button__true");
+            btnSend.current.classList.add("formulario-button__false");
+        }
+    }, [ userNameState, passwordState ] );
+
 
     return(
         <section className="container">
@@ -49,7 +59,13 @@ function Form() {
                         onChange={passwordChanges}>
                     </input>
                     
-                    <input type="submit" className="formulario-button" value="Connect"></input>
+                    <input 
+                        ref={btnSend}
+                        type="submit" 
+                        className={`formulario-button formulario-button__false`} 
+                        value="Connect"
+                        disabled={true}>
+                    </input>
                 </form>
             </div>
         </section>
