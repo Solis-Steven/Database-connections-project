@@ -1,14 +1,22 @@
 import React from "react";
+import "./Form.css"
 
 function Form() {
     return(
-        <form>
-            <label>Algo</label>
-            <input type="text"></input>
-            <label>Algo</label>
-            <input type="text"></input>
-            <button type="submit"></button>
-        </form>
+
+    <section className="container">
+        <div className="prueba">
+        
+            <form className="form">
+            <h2 className="title">Database connections</h2>
+                <label className="formulario-label">Username or address for the connection</label>
+                <input type="text" className="formulario-input" placeholder="Username"></input>
+                <label className="formulario-label">Password for the connection</label>
+                <input type="password" className="formulario-input" placeholder="Password"></input>
+                <input type="submit" className="formulario-button" value="Connect"></input>
+            </form>
+        </div>
+    </section>
     );
 }
 

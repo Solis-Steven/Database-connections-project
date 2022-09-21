@@ -1,10 +1,11 @@
 import "./style.css";
-
+import { Form } from "./components/Form";
 import StarfieldAnimation from "react-starfield-animation";
 
 export default function App() {
   return (
-    <StarfieldAnimation
+    <>
+      <StarfieldAnimation
       style={{
         position: "absolute",
         width: "100%",
@@ -14,6 +15,10 @@ export default function App() {
       particleSpeed={0}
       dx={0.000000001} // x speed of stars in px/frame, default 0.05
       dy={0.000000001}
-    />
+      />
+
+      <Form />
+    </>
+    
   );
 }
