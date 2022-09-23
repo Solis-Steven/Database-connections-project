@@ -1,6 +1,8 @@
 import "./style.css";
-import { Form } from "./components/Form";
 import StarfieldAnimation from "react-starfield-animation";
+import { FormRemote } from "./components/FormRemote";
+import { Route, Routes } from "react-router-dom"
+import { Frame } from "./components/Frame";
 
 export default function App() {
   return (
@@ -17,7 +19,12 @@ export default function App() {
       dy={0.000000001}
       />
 
-      <Form />
+      <Routes>
+        <Route path="/" element={<FormRemote />} />
+        <Route path="/schema" element={<Frame />} />
+      </Routes>
+      {/* <Frame /> */}
+      
     </>
     
   );

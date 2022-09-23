@@ -1,0 +1,23 @@
+.table-container {
+    /* border: 1px solid white; */
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.table-body, .table-head {
+    text-align: left;
+}
+
+.table-head {
+    font-weight: bold;
+    color: rgb(233, 233, 14);
+}
+
+.table-body {
+    color: white;
+}
+
+td, th {
+    border: 2px solid white;
+    padding: 1rem 2rem;
+}

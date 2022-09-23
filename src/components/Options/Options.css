@@ -1,0 +1,12 @@
+.table-checkbox {
+    cursor: pointer;
+}
+
+.table-label {
+    color: white;
+}
+
+.table-label__title {
+    font-size: 1.3rem;
+    border-bottom: 1px solid white;
+}
