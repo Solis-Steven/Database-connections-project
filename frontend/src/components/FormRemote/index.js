@@ -46,7 +46,7 @@ function FormRemote() {
                 }
                 await fetch("api", {
                     method: "POST",
-                    body: JSON.stringify(connectionValues),
+                    body: connectionValues,
                     headers: {
                         "Content-Type": "application/json"
                     }
