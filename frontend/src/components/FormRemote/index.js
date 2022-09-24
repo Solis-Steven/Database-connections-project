@@ -28,7 +28,7 @@ function FormRemote() {
         setUserState(e.target.value); 
     }
  
-     const passwordChanges = (e) => {
+    const passwordChanges = (e) => {
         setPasswordState(e.target.value); 
     }
  
@@ -44,18 +44,18 @@ function FormRemote() {
                     user: userState,
                     password: passwordState 
                 }
-                await fetch("api", {
+                await fetch("http://localhost:3000/userLogin", {
                     method: "POST",
-                    body: connectionValues,
+                    body: JSON.stringify(connectionValues),
                     headers: {
                         "Content-Type": "application/json"
                     }
                 })
-                .then( res => res.json()); ///then(res => console.log(res))
+                .then( res => res.json()); // then(res => console.log(res))
 
                 navigate("/schema")
             } catch (error) {
-
+                console.log("Error en frontend", error)
             }
         }
 

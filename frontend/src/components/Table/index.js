@@ -4,7 +4,6 @@ import "./Table.css"
 
 
 function Table( schema ) {
-    console.log(schema)
     return(
         <table className="table-container">
             <thead className="table-head">
