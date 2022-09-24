@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 function FormRemote() {
     const [ serverConnectionState, setServerConnectionState ] = React.useState("");
     const [ databaseState, setDatabaseState ] = React.useState("");
-    const [ portState, setPorState ] = React.useState("");
+    const [ portState, setPorState ] = React.useState(0);
     const [ userState, setUserState ] = React.useState("");
     const [ passwordState, setPasswordState ] = React.useState("");
     const myForm = React.useRef( null );
@@ -104,7 +104,7 @@ function FormRemote() {
 
                     <label className="formulario-label__remote">Port to connect</label>
                     <input 
-                        type="text" 
+                        type="number" 
                         className="formulario-input__remote" 
                         name="port"
                         value={portState}

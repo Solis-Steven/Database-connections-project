@@ -3,8 +3,8 @@
 // Framework a utilizar para crear nuestro servidor
 import express from 'express' 
 // Nos permite que el cliente tenga permisos de acceso a los recursos del servidor 
-import cors from 'cors' 
-import morgan from 'morgan';
+import cors from 'cors';
+import morgan from 'morgan'
 // Obtenemos todas las rutas de nuestras apis
 import loginRoute from "./routes/loginRoute.routes.js"  
 

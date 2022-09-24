@@ -4,17 +4,18 @@ import { getConnection, queries } from "../database/index.js"
 
 export const loadSchemaData = async ( pool, res ) => {
 
-    const response = await client.query("select genSchemaName();")
+    const response = await pool.query("select genSchemaName();")
     const schemaNames = response.rows[0].genschemaname;
     const schemaList = schemaNames.split(',');
     var jsonList = [];
     for (const schema of schemaList) {  
-        const reponse2 = await client.query("select genJsonData('"+ schema +"');")  
-        const jsonReponse = res.rows[0].genjsondata
+        const reponse2 = await pool.query("select genJsonData('"+ schema +"');")  
+        const jsonReponse = reponse2.rows[0].genjsondata
         const parsedJson = JSON.parse(jsonReponse)
         jsonList.push(parsedJson);
     }
-    await client.end();
+    console.log(jsonList);
+    await pool.end();
     return jsonList;
     
 }
@@ -22,7 +23,14 @@ export const loadSchemaData = async ( pool, res ) => {
 
 export const makeConnection = async ( req, res ) => {
     try {
-        const pool = await getConnection( req.body );
+        const connectionValues = ({
+            user: req.body.user,
+            host: req.body.serverConnection,
+            database: req.body.databaseName,
+            password: req.body.password,
+            port: req.body.port,
+        });
+        const pool = await getConnection( connectionValues );
         loadSchemaData( pool )
         .then( result  => {
             console.log(result);
