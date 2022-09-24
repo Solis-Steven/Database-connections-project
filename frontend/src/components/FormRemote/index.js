@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./FormRemote.css"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 function FormRemote() {
     const [ serverConnectionState, setServerConnectionState ] = React.useState("");
@@ -29,15 +29,38 @@ function FormRemote() {
     }
  
      const passwordChanges = (e) => {
-         setPasswordState(e.target.value); 
+        setPasswordState(e.target.value); 
     }
  
-     const onSubmit = (e) => {
-         e.preventDefault();
+    const onSubmit = (e) => {
+        e.preventDefault();
 
-         if(serverConnectionState != "" && databaseState != "" && portState != "" && userState != "" && passwordState != "") {
-            navigate("/schema")
-         } 
+        const generateDiagram = async () => {
+            try {
+                const connectionValues = {
+                    serverConnection: serverConnectionState,
+                    databaseName: databaseState,
+                    port: portState,
+                    user: userState,
+                    password: passwordState 
+                }
+                await fetch("api", {
+                    method: "POST",
+                    body: JSON.stringify(connectionValues),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                .then( res => res.json()); ///then(res => console.log(res))
+
+                navigate("/schema")
+            } catch (error) {
+
+            }
+        }
+
+        generateDiagram()
+
     }
  
      useEffect( () => {
@@ -57,51 +80,55 @@ function FormRemote() {
             
                 <form ref={myForm} className="form" onSubmit={onSubmit}>
                 <h2 className="title__remote">Database Remote Connections</h2>
-                    <label className="formulario-label__remote">Server connection</label>
+                    <label className="formulario-label__remote">Server to connect</label>
                     <input 
                         type="text"
                         className="formulario-input__remote" 
                         name="serverConnection"
                         value={serverConnectionState}
                         onChange={serverConnectionChanges}
+                        placeholder="Server connection"
                         required>
                     </input>
 
-                    <label className="formulario-label__remote">Database name</label>
+                    <label className="formulario-label__remote">Database to connect</label>
                     <input 
                         type="text" 
                         className="formulario-input__remote" 
                         name="databaseName"
                         value={databaseState}
                         onChange={databaseChanges}
+                        placeholder="Database name"
                         required>
                     </input>
 
-                    <label className="formulario-label__remote">Port</label>
+                    <label className="formulario-label__remote">Port to connect</label>
                     <input 
                         type="text" 
                         className="formulario-input__remote" 
                         name="port"
                         value={portState}
                         onChange={portChanges}
+                        placeholder="Port"
                         required>
                     </input>
 
-                    <label className="formulario-label__remote">User</label>
+                    <label className="formulario-label__remote">User name</label>
                     <input 
                         type="text" 
                         className="formulario-input__remote" 
                         name="user"
                         value={userState}
                         onChange={userNameChanges}
+                        placeholder="User"
                         required>
                     </input>
 
-                    <label className="formulario-label__remote">Password</label>
+                    <label className="formulario-label__remote">User password</label>
                     <input 
                         type="password" 
                         className="formulario-input__remote" 
-                        
+                        placeholder="Password"
                         name="password"
                         value={passwordState}
                         onChange={passwordChanges}

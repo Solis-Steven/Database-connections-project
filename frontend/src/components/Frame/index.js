@@ -72,7 +72,7 @@ function Frame() {
 
                 <div className="frame-footer">
                     <Link  to="/" className="footer-btn" >Go back</Link>
-                    <Link  to="" className="footer-btn" >Next</Link>
+                    <Link  to="" className="footer-btn" >Generate diagram</Link>
                 </div>
             </div>
         </section>
