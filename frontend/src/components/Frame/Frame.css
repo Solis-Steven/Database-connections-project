@@ -7,24 +7,23 @@
     height: 100vh;
 }
 
-.frame-flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.frame {
     border: 2px solid white;
     width: 90%;
     border-radius: 1rem;
 }
 
 .tables {
-    display: grid;
-    grid-template-columns: 1fr;
-    width: 90%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     gap: 2rem;
     z-index: 1;
     align-items: center;
-    align-content: center;
+    justify-content: center;
+    height: 70vh;
+    overflow-y: scroll;
+    padding-top: 260rem;
 }
 
 .table-name {
@@ -49,15 +48,4 @@
     z-index: 1;
     cursor: pointer;
     text-decoration: none;
-}
-
-.single-table {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: left;
-}
-
-.single-table:first-child {
-    margin-top: 2rem;
 }

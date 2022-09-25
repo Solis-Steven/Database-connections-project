@@ -4,8 +4,8 @@ import { getConnection, queries } from "../database/index.js"
 
 export const loadSchemaData = async ( pool, res ) => {
 
-    const response = await pool.query("select genSchemaName();")
-    const schemaNames = response.rows[0].genschemaname;
+    const response = await pool.query("select genSchemaNames();")
+    const schemaNames = response.rows[0].genschemanames;
     const schemaList = schemaNames.split(',');
     var jsonList = [];
     for (const schema of schemaList) {  
@@ -14,10 +14,8 @@ export const loadSchemaData = async ( pool, res ) => {
         const parsedJson = JSON.parse(jsonReponse)
         jsonList.push(parsedJson);
     }
-    console.log(jsonList);
-    await pool.end();
+    pool.end();
     return jsonList;
-    
 }
 
 
@@ -33,7 +31,7 @@ export const makeConnection = async ( req, res ) => {
         const pool = await getConnection( connectionValues );
         loadSchemaData( pool )
         .then( result  => {
-            console.log(result);
+            res.send( result );
         });
     } catch( error ) {
         console.log( "Error de conexion", error.message );

@@ -1,6 +1,6 @@
 import React from "react";
 import "./Frame.css"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { Table } from "../Table";
 
 
@@ -55,18 +55,20 @@ const db = [
     }
 ]
 
-function Frame() {
+function Frame( ) {
+    const location = useLocation();
     return(
         <section className="frame-container">
             <div className="frame-flex">
 
                 <div className="tables">
                     {
-                        db.map( table => (
-                            <div  className="single-table">
-                                <Table schemaInformation={table}/>
-                            </div>
+                        location.state.map( table => (
+                            <Table schemaInformation={ table }/>
                         ) )
+
+                        // <Table schemaInformation={ location.state[1] }/>
+
                     }
                 </div>
 

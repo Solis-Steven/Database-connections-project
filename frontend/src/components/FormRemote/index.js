@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 function FormRemote() {
     const [ serverConnectionState, setServerConnectionState ] = React.useState("");
     const [ databaseState, setDatabaseState ] = React.useState("");
-    const [ portState, setPorState ] = React.useState(0);
+    const [ portState, setPorState ] = React.useState("");
     const [ userState, setUserState ] = React.useState("");
     const [ passwordState, setPasswordState ] = React.useState("");
     const myForm = React.useRef( null );
@@ -35,7 +35,7 @@ function FormRemote() {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const generateDiagram = async () => {
+        const generateDiagram = () => {
             try {
                 const connectionValues = {
                     serverConnection: serverConnectionState,
@@ -44,16 +44,16 @@ function FormRemote() {
                     user: userState,
                     password: passwordState 
                 }
-                await fetch("http://localhost:3000/userLogin", {
+                fetch("http://localhost:3000/userLogin", {
                     method: "POST",
                     body: JSON.stringify(connectionValues),
                     headers: {
                         "Content-Type": "application/json"
                     }
                 })
-                .then( res => res.json()); // then(res => console.log(res))
+                .then( res => res.json())
+                .then( data => navigate( "/schema", {state: data} ) );
 
-                navigate("/schema")
             } catch (error) {
                 console.log("Error en frontend", error)
             }
@@ -104,7 +104,7 @@ function FormRemote() {
 
                     <label className="formulario-label__remote">Port to connect</label>
                     <input 
-                        type="number" 
+                        type="text" 
                         className="formulario-input__remote" 
                         name="port"
                         value={portState}

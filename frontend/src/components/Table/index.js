@@ -12,15 +12,15 @@ function Table( schema ) {
                     <th>tableName</th>
                     <th>attributeName</th>
                     <th>dataType</th>
-                    <th>constraintName</th>
-                    <th>constraintType</th>
+                    {/* <th>constraintName</th>
+                    <th>constraintType</th> */}
                 </tr>
             </thead>
             <tbody className="table-body">
                 {
                     schema.schemaInformation.tables.map( attributes => {
                         const tableName = attributes.tableName;
-                        return attributes.attributes.map( attribute => (
+                        return attributes.atributes.map( attribute => (
                             <tr>
                                 <Options schemaName={schema.schemaInformation.schemaName} tableName={tableName} attributesInformation={attribute} />
                             </tr>
