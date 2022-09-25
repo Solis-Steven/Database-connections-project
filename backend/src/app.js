@@ -5,8 +5,12 @@ import express from 'express'
 // Nos permite que el cliente tenga permisos de acceso a los recursos del servidor 
 import cors from 'cors';
 import morgan from 'morgan'
+
 // Obtenemos todas las rutas de nuestras apis
+import fillDataRoute from "./routes/fillData.routes.js"  
+
 import loginRoute from "./routes/loginRoute.routes.js"  
+
 
 // Creamos una instancia de express para utilizar nuestras rutas
 const app = express();
@@ -16,7 +20,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false})) // Para que reciba datos que vienen desde formularios html
 app.use(cors());
 app.use(morgan("dev"));
+app.use(fillDataRoute);
 app.use(loginRoute);
+
 
 // Exportamos nuestra instancia para poder consumirla desde otro sitio
 export default app;

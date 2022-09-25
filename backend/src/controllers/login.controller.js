@@ -1,25 +1,22 @@
 // Importamos la conexión con nuestra base de datos y las consultas
 import { getConnection, queries } from "../database/index.js"
 
-
 export const loadSchemaData = async ( pool, res ) => {
-
-    const response = await pool.query("select genSchemaName();")
-    const schemaNames = response.rows[0].genschemaname;
+    const response = await pool.query("select genschemanames();")
+    const schemaNames = response.rows[0].genschemanames;
     const schemaList = schemaNames.split(',');
     var jsonList = [];
     for (const schema of schemaList) {  
-        const reponse2 = await pool.query("select genJsonData('"+ schema +"');")  
+        const reponse2 = await pool.query("select genjsondata('"+ schema +"');")  
         const jsonReponse = reponse2.rows[0].genjsondata
         const parsedJson = JSON.parse(jsonReponse)
         jsonList.push(parsedJson);
     }
+    // debugger;
     console.log(jsonList);
-    await pool.end();
-    return jsonList;
-    
+    pool.end();
+    // return jsonList;
 }
-
 
 export const makeConnection = async ( req, res ) => {
     try {

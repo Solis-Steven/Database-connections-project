@@ -35,7 +35,7 @@ function FormRemote() {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const generateDiagram = async () => {
+        const generateDiagram =  () => {
             try {
                 const connectionValues = {
                     serverConnection: serverConnectionState,
@@ -44,15 +44,16 @@ function FormRemote() {
                     user: userState,
                     password: passwordState 
                 }
-                await fetch("http://localhost:3000/userLogin", {
+                fetch("http://localhost:3000/userLogin", {
                     method: "POST",
                     body: JSON.stringify(connectionValues),
                     headers: {
                         "Content-Type": "application/json"
                     }
                 })
-                .then( res => res.json()); // then(res => console.log(res))
+                .then(res => console.log(res)); //  .then( res => res.json())
 
+                console.log("Hola")
                 navigate("/schema")
             } catch (error) {
                 console.log("Error en frontend", error)
